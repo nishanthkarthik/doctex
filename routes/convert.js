@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer')
 var fs = require('fs');
+var path = require('path');
+var appDir = path.dirname(require.main.filename).replace('bin','uploads/');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -33,7 +35,7 @@ router.post('/', function(req, res) {
 			});
 
 		//process files here
-		fs.rename(req.file.originalname, req.file.originalname + '.tex', function(err) {
+		fs.rename(appDir + req.file.originalname, appDir + req.file.originalname + '.tex', function(err) {
 			res.json({
 				message: 'uploaded',
 				result_url: '/result?id=' + req.file.originalname + '.tex'

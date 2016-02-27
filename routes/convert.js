@@ -57,10 +57,11 @@ router.post('/', function(req, res) {
 			function() {
 				console.log(xconvert.stdout);
 				//echo outfile
-				res.json({
+				/*res.json({
 					message: 'uploaded',
 					result_url: '/result?id=' + req.file.originalname + '.tex'
-				});
+				});*/
+				res.redirect('/result?id=' + req.file.originalname + '.tex');
 			}
 		);
 

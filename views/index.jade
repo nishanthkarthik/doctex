@@ -1,9 +1,12 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
-    hr
-    form#uploadForm(enctype='multipart/form-data', action='/convert', method='post')
-        input(type='file', name='userDoc')
-        input(type='submit', value='Upload File', name='submit')
+    .panel.panel-default
+        .panel-body
+            h1= title
+            p #{title} - The ultimate doc to tex convertor
+            hr
+            form#uploadForm(enctype='multipart/form-data', action='/convert', method='post')
+                input.btn-block(type='file', name='userDoc')
+                br
+                input.btn.btn-primary(type='submit', value='Upload File', name='submit', style='float: right;')

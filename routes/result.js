@@ -33,11 +33,10 @@ router.get('/', function(req, res, next) {
 						res.render('tex_render', {
 							title: 'docTex',
 							filename: req.query.id,
-							tex: data
+							tex: data.replace('% This file was converted to LaTeX by Writer2LaTeX ver. 1.0.2\n','% Tex rendering - Powered by Microsoft Azure').replace('% see http://writer2latex.sourceforge.net for more info','')
 						});
 					}
 				});
-
 
 
 			} else

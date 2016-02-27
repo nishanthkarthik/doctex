@@ -2,8 +2,11 @@ extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
+    h5 #{title} - The ultimate doc to tex convertor
     hr
-    p #{filename}
-    hr 
-    pre #{tex}
+    .panel.panel-default
+        .panel-heading
+            h6 Tex output
+        .panel-body
+            hr 
+            pre.override-tex #{tex}

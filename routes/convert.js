@@ -3,7 +3,21 @@ var router = express.Router();
 var multer = require('multer')
 var fs = require('fs');
 var path = require('path');
-var appDir = path.dirname(require.main.filename).replace('bin','uploads/');
+var appDir = path.dirname(require.main.filename).replace('bin', 'uploads/');
+var outDir = path.dirname(require.main.filename).replace('bin', 'uploads');
+var sourceDir = path.dirname(require.main.filename).replace('bin', '');
+
+/* UTILITY function*/
+function run_cmd(cmd, args, cb, end) {
+	var spawn = require('child_process').spawn,
+		child = spawn(cmd, args),
+		me = this;
+	child.stdout.on('data', function(buffer) {
+		cb(me, buffer)
+	});
+	child.stdout.on('end', end);
+}
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -35,12 +49,28 @@ router.post('/', function(req, res) {
 			});
 
 		//process files here
-		fs.rename(appDir + req.file.originalname, appDir + req.file.originalname + '.tex', function(err) {
+		var xconvert = new run_cmd(
+			sourceDir + 'doctex.sh', [appDir + req.file.originalname, outDir],
+			function(me, buffer) {
+				me.stdout += buffer.toString()
+			},
+			function() {
+				console.log(xconvert.stdout);
+				//echo outfile
+				res.json({
+					message: 'uploaded',
+					result_url: '/result?id=' + req.file.originalname + '.tex'
+				});
+			}
+		);
+
+/*		fs.rename(appDir + req.file.originalname, appDir + req.file.originalname + '.tex', function(err) {
 			res.json({
 				message: 'uploaded',
 				result_url: '/result?id=' + req.file.originalname + '.tex'
 			});
 		});
+*/
 
 	});
 });

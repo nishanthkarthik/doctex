@@ -3,7 +3,7 @@ var router = express.Router();
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
-var appDir = path.dirname(require.main.filename).replace('bin','uploads/');
+var appDir = path.dirname(require.main.filename).replace('bin', 'uploads/');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,9 +17,14 @@ router.get('/', function(req, res, next) {
 				res.json({
 					error: err
 				});
-			} else if (err == null)
-				res.download(filename);
-			else
+			} else if (err == null) {
+				//res.download(filename);
+				fs.readFile(filename, 'utf8', function(err, data) {
+					if (err)
+						console.log(err);
+					res.end(data);
+				});
+			} else
 				res.json({
 					error: 'file not available'
 				});

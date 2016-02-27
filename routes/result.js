@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
 				fs.readFile(filename, 'utf8', function(err, data) {
 					if (err)
 						console.log(err);
+					res.setHeader('Content-Type', 'text/html');
 					res.end(data);
 				});
 			} else

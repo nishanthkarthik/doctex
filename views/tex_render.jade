@@ -6,11 +6,12 @@ block aux_head
 
 block content
     h1= title
-    h5 #{title} - The ultimate doc to tex convertor
+    h5 #{title} - The ultimate doc to teX convertor
     hr
     .panel.panel-default
         .panel-heading
-            h6 Tex output
+            h6 TeX output
+            a.btn.btn-default(href='/') Back to home
         .panel-body
             hr 
             pre.prettyprint.lang-tex.override-tex #{tex}

@@ -1,5 +1,9 @@
 extends layout
 
+block aux_head
+    script(src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js')
+    link(rel='stylesheet', href='stylesheets/desert.css')
+
 block content
     h1= title
     h5 #{title} - The ultimate doc to tex convertor
@@ -9,4 +13,4 @@ block content
             h6 Tex output
         .panel-body
             hr 
-            pre.override-tex #{tex}
+            pre.prettyprint.lang-tex.override-tex #{tex}

@@ -10,4 +10,4 @@ var1=${1/'docx'/'odt'}
 var2=${1/'docx'/'docx.tex'}
 
 loffice --headless --convert-to odt --outdir $2 $1
-w2l -ultralight $var1 $var2 
+w2l $var1 $var2 
